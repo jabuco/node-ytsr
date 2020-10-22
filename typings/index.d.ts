@@ -1,16 +1,16 @@
-declare module 'ytsr' {
-  namespace ytsr {
+declare module "ytsr" {
+  export namespace ytsr {
     interface Options {
       safeSearch?: boolean;
       limit?: number;
       nextpageRef?: string;
       hl?: string;
       gl?: string;
-      headers?: { [key: string]: string; };
+      headers?: { [key: string]: string };
     }
 
     interface Mix {
-      type: 'mix';
+      type: "mix";
       title: string;
       firstItem: string;
       thumbnail: string;
@@ -18,7 +18,7 @@ declare module 'ytsr' {
     }
 
     interface Playlist {
-      type: 'playlist';
+      type: "playlist";
       title: string;
       link: string;
       thumbnail: string;
@@ -31,7 +31,7 @@ declare module 'ytsr' {
     }
 
     interface Channel {
-      type: 'channel';
+      type: "channel";
       name: string;
       channel_id: string;
       link: string;
@@ -43,7 +43,7 @@ declare module 'ytsr' {
     }
 
     interface Video {
-      type: 'video';
+      type: "video";
       live: boolean;
       title: string;
       link: string;
@@ -60,7 +60,7 @@ declare module 'ytsr' {
     }
 
     interface Movie {
-      type: 'movie';
+      type: "movie";
       title: string;
       link: string;
       thumbnail: string;
@@ -77,7 +77,7 @@ declare module 'ytsr' {
     }
 
     interface RelatedSearches {
-      type: 'search-refinements';
+      type: "search-refinements";
       entrys: {
         link: string;
         q: string | null;
@@ -85,7 +85,7 @@ declare module 'ytsr' {
     }
 
     interface ShelfCompact {
-      type: 'shelf-compact';
+      type: "shelf-compact";
       title: string;
       items: {
         type: string;
@@ -98,7 +98,7 @@ declare module 'ytsr' {
     }
 
     interface ShelfVertical {
-      type: 'shelf-vertical';
+      type: "shelf-vertical";
       title: string;
       items: Video[];
     }
@@ -109,7 +109,15 @@ declare module 'ytsr' {
       active: boolean;
     }
 
-    type Item = Mix | Playlist | Channel | Video | Movie | RelatedSearches | ShelfCompact | ShelfVertical;
+    type Item =
+      | Mix
+      | Playlist
+      | Channel
+      | Video
+      | Movie
+      | RelatedSearches
+      | ShelfCompact
+      | ShelfVertical;
 
     interface Result {
       query: string;
@@ -120,11 +128,12 @@ declare module 'ytsr' {
       currentRef: string | null;
     }
 
-    function getFilters(searchString: string, options?: ytsr.Options): Promise<Map<string, Filter[]>>;
+    function getFilters(
+      searchString: string,
+      options?: ytsr.Options
+    ): Promise<Map<string, Filter[]>>;
   }
-
   function ytsr(id: string): Promise<ytsr.Result>;
   function ytsr(id: string | null, options: ytsr.Options): Promise<ytsr.Result>;
-
-  export = ytsr;
+  export default ytsr;
 }
